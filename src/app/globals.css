@@ -1,26 +1,202 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fbfc;
+  --foreground: #1a2e35;
+  --aqua: #00bcd4;
+  --aqua-light: #4dd0e1;
+  --aqua-dark: #0097a7;
+  --aqua-glow: rgba(0, 188, 212, 0.25);
+  --surface: #ffffff;
+  --surface-light: #e8f4f6;
+  --muted: #5a7a82;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-aqua: var(--aqua);
+  --color-aqua-light: var(--aqua-light);
+  --color-aqua-dark: var(--aqua-dark);
+  --color-surface: var(--surface);
+  --color-surface-light: var(--surface-light);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-bricolage);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Animated gradient background */
+.gradient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 188, 212, 0.12), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(0, 188, 212, 0.08), transparent),
+    radial-gradient(ellipse 50% 30% at 0% 80%, rgba(0, 188, 212, 0.06), transparent),
+    var(--background);
+}
+
+/* Geometric grid pattern */
+.grid-pattern {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: 
+    linear-gradient(rgba(0, 188, 212, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 188, 212, 0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
+}
+
+/* Glow effect for cards */
+.glow-card {
+  background: var(--surface);
+  border: 1px solid rgba(0, 188, 212, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.glow-card:hover {
+  border-color: rgba(0, 188, 212, 0.5);
+  box-shadow: 0 8px 40px rgba(0, 188, 212, 0.12);
+}
+
+/* Aqua button styles */
+.btn-aqua {
+  background: linear-gradient(135deg, var(--aqua), var(--aqua-dark));
+  color: #ffffff;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 188, 212, 0.35);
+}
+
+.btn-aqua:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(0, 188, 212, 0.45);
+}
+
+.btn-aqua:active {
+  transform: translateY(0);
+}
+
+/* Input styles */
+.input-aqua {
+  background: var(--surface);
+  border: 1px solid rgba(0, 212, 170, 0.2);
+  color: var(--foreground);
+  transition: all 0.3s ease;
+}
+
+.input-aqua:focus {
+  outline: none;
+  border-color: var(--aqua);
+  box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.15);
+}
+
+.input-aqua::placeholder {
+  color: var(--muted);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 188, 212, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 188, 212, 0.5);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Staggered animation delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+
+/* Text gradient */
+.text-gradient {
+  background: linear-gradient(135deg, var(--aqua-light), var(--aqua), var(--aqua-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Decorative elements */
+.aqua-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--aqua);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--aqua);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(0, 188, 212, 0.25);
+  color: var(--foreground);
 }
