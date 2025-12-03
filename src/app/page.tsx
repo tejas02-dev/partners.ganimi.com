@@ -14,7 +14,7 @@ export default function Home() {
 
     setIsLoading(true);
     // Simulate API call
-    const response = await fetch('https://ganimi.app/api/v1/waitlist/vendor', {
+    const response = await fetch('https://ganimi.app/api/waitlist/vendors', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
