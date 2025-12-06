@@ -1,215 +1,333 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { BackgroundBeams } from "../components/BackgroundBeams";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [selectedTier, setSelectedTier] = useState<number>(0);
 
-  const offersForVendor = [
-    "Free Subscription for 3 years",
-    "Business Growth 2x to 3x",
-    "Your Brand Promotion",
-    "Your Service / Product Promotion",
-    "Sustainable Business for 10 years",
-    "Cross Platform Promotion",
-    "Networking with Same domain",
-    "Networking with Useful Resources",
-    "Tech Platform",
-    "AI Tech Platform",
-    "Marketing Event Access",
-    "Trainings",
-    "Competition District/State/National Level",
-    "National Level exposure",
-    "Membership (cards)",
-    "Same Domain Celebrity",
-    "State National Player On Board for Branding",
-  ];
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
 
-  const benefitsToVendor = [
-    "Hi Tech AI Integrated Platform",
-    "Data Management with ERP",
-    "Ease of admin",
-    "Stakeholder Connect",
-  ];
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, observerOptions);
 
-  const businessToVendor = [
-    "Growth of admission 2x to 3x",
-    "Systematic Admin",
-    "Reports",
-    "Business growth",
-    "Revenue Growth",
-    "Sustainable Business",
+    const elements = document.querySelectorAll(".animate-on-scroll");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, observerOptions);
+
+    const elements = document.querySelectorAll(".animate-on-scroll");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
+
+  const [selectedOfferCategory, setSelectedOfferCategory] = useState<string>("all");
+
+  const offerCategories = {
+    all: {
+      name: "All Offers",
+      icon: "M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z",
+    },
+    growth: {
+      name: "Growth & Access",
+      icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
+    },
+    promotion: {
+      name: "Promotion & Marketing",
+      icon: "M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z",
+    },
+    technology: {
+      name: "Technology",
+      icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+    },
+    networking: {
+      name: "Networking",
+      icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z",
+    },
+    events: {
+      name: "Events & Training",
+      icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z",
+    },
+    recognition: {
+      name: "Recognition",
+      icon: "M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z",
+    },
+  };
+
+  // Define offers as a constant array
+  const allOffersForVendor = [
+    { id: 1, text: "Free Subscription for 3 years", category: "growth", highlight: true },
+    { id: 2, text: "Business Growth 2x to 3x", category: "growth", highlight: true },
+    { id: 3, text: "Sustainable Business for 10 years", category: "growth" },
+    { id: 4, text: "Your Brand Promotion", category: "promotion" },
+    { id: 5, text: "Your Service / Product Promotion", category: "promotion" },
+    { id: 6, text: "Cross Platform Promotion", category: "promotion" },
+    { id: 7, text: "National Level exposure", category: "promotion", highlight: true },
+    { id: 8, text: "Tech Platform", category: "technology" },
+    { id: 9, text: "AI Tech Platform", category: "technology", highlight: true },
+    { id: 10, text: "Networking with Same domain", category: "networking" },
+    { id: 11, text: "Networking with Useful Resources", category: "networking" },
+    { id: 12, text: "Marketing Event Access", category: "events" },
+    { id: 13, text: "Trainings", category: "events" },
+    { id: 14, text: "Competition District/State/National Level", category: "events", highlight: true },
+    { id: 15, text: "Membership (cards)", category: "recognition" },
+    { id: 16, text: "Same Domain Celebrity", category: "recognition" },
+    { id: 17, text: "State National Player On Board for Branding", category: "recognition", highlight: true },
   ];
 
   const faqs = [
     {
       question: "What is Ganimi Partners?",
-      answer: "Ganimi Partners is a platform connecting vendors and service providers with students and families seeking quality education and career development services. We offer comprehensive tools and resources to help vendors grow their business while making a meaningful impact.",
+      answer: "Ganimi Partners is a vendor partnership program that connects activity providers with parents and students seeking quality extracurricular programs.",
     },
     {
-      question: "How do I become a partner?",
-      answer: "You can join our partner network by signing up through our platform. We offer free subscription for 3 years to get you started. Simply fill out the registration form and our team will guide you through the onboarding process.",
+      question: "How do I become a vendor partner?",
+      answer: "Simply fill out our contact form with your business details, and our team will reach out to discuss partnership opportunities.",
     },
     {
-      question: "What benefits do I get as a vendor?",
-      answer: "As a vendor partner, you get access to our AI-integrated platform, ERP data management, marketing support, networking opportunities, training programs, and much more. You'll also benefit from business growth opportunities, brand promotion, and sustainable business development.",
+      question: "What are the membership tiers?",
+      answer: "We offer four membership tiers: Platinum (premium), Diamond (strong visibility), Gold (mid-tier), and Silver (entry-level).",
     },
     {
-      question: "Is there a subscription fee?",
-      answer: "We offer free subscription for the first 3 years to our partner vendors. This includes access to all platform features, tools, and resources. After the initial period, we have flexible pricing plans tailored to your business needs.",
+      question: "Is there a free trial?",
+      answer: "Yes! We offer 1 year free access to the full vendor dashboard, and the first 10 vendors in each category get 3 years free.",
+    },
+  ];
+
+  const membershipTiers = [
+    {
+      name: "Platinum",
+      description: "Premium status with highest brand exposure, exclusive backstage event access, personal consultations, masterclass invitations, and unmatched promotional positioning.",
+      features: [
+        "Highest brand exposure",
+        "Exclusive backstage access",
+        "Personal consultations",
+        "Masterclass invitations",
+        "Unmatched promotional positioning",
+        "Priority support"
+      ],
+      popular: true,
     },
     {
-      question: "What kind of support do you provide?",
-      answer: "We provide comprehensive support including technical assistance, marketing support, training programs, networking opportunities, and access to competitions at district, state, and national levels. Our team is dedicated to helping you succeed.",
+      name: "Diamond",
+      description: "Strong visibility and advanced promotional opportunities, with access to priority networking and VIP privileges.",
+      features: [
+        "Strong visibility",
+        "Advanced promotional opportunities",
+        "Priority networking",
+        "VIP privileges",
+        "Enhanced analytics",
+        "Dedicated support"
+      ],
+      popular: false,
     },
     {
-      question: "How does the AI platform work?",
-      answer: "Our AI-integrated platform helps you manage your business efficiently with automated data management, ERP integration, and intelligent tools that streamline administrative tasks. This allows you to focus on what matters most - growing your business.",
+      name: "Gold",
+      description: "Ideal mid-tier position offering consistent visibility, scheduled spotlight rotations, and general networking benefits.",
+      features: [
+        "Consistent visibility",
+        "Scheduled spotlight rotations",
+        "General networking benefits",
+        "Standard analytics",
+        "Email support"
+      ],
+      popular: false,
+    },
+    {
+      name: "Silver",
+      description: "Entry-level tier offering essential exposure ideal for new or growing vendors.",
+      features: [
+        "Essential exposure",
+        "Basic listing",
+        "Community access",
+        "Basic analytics",
+        "Email support"
+      ],
+      popular: false,
     },
   ];
 
   return (
-    <main className="min-h-screen flex flex-col">
-      {/* Navigation */}
-      <nav className="w-full px-6 py-6 animate-fade-in bg-white">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link href="/home" className="flex items-center gap-3">
-            <span className="text-xl font-semibold tracking-tight">
-              Ganimi <span className="text-[var(--muted)]">Partners</span>
-            </span>
-          </Link>
-          <div className="flex items-center gap-6">
-            <Link
-              href="/home"
-              className="text-sm font-medium text-[var(--foreground)] hover:text-[var(--aqua)] transition-colors"
-            >
-              Home
-            </Link>
-            <Link
-              href="/about"
-              className="text-sm font-medium text-[var(--muted)] hover:text-[var(--aqua)] transition-colors"
-            >
-              About Us
-            </Link>
-            <Link
-              href="/contact"
-              className="text-sm font-medium text-[var(--muted)] hover:text-[var(--aqua)] transition-colors"
-            >
-              Contact
-            </Link>
-          </div>
-        </div>
-      </nav>
-
+    <main className="min-h-screen">
+      <Navbar />
+      
       {/* Hero Section */}
-      <section className="relative flex-1 flex items-center justify-center px-6 py-8 md:py-16 overflow-hidden bg-gradient-to-b from-[var(--aqua-dark)] via-[var(--aqua)] to-[var(--aqua-light)]">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Diagonal lines pattern */}
-          <div className="absolute inset-0 opacity-10" style={{
-            backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.1) 10px, rgba(255,255,255,0.1) 20px)`
-          }} />
-          {/* Light aqua speckles/streaks */}
-          <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-white/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-white/15 rounded-full blur-3xl animate-pulse delay-700" />
-          <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-white/10 rounded-full blur-2xl animate-pulse delay-300" />
+      <section className="hero">
+        <div className="hero-background">
+          <div className="hero-overlay"></div>
+          <div className="hero-pattern"></div>
+          <BackgroundBeams />
         </div>
-
-        <div className="max-w-6xl mx-auto text-center relative z-10">
-          {/* Logo */}
-          <div className="mb-6 opacity-0 animate-fade-in-up">
-            <div className="w-28 h-28 md:w-36 md:h-36 mx-auto flex items-center justify-center mb-4">
-              <Image
-                src="/logo-white.png"
-                alt="Ganimi Logo"
-                width={200}
-                height={200}
-                className="w-full h-full object-contain"
-              />
-            </div>
-          </div>
-
-          {/* Tagline */}
-          <h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6 opacity-0 animate-fade-in-up delay-100 text-white"
-            style={{ fontFamily: "var(--font-bricolage)" }}
-          >
-            Life is all about success and satisfaction
-          </h1>
-
-          <p className="text-xl sm:text-2xl text-blue-50 max-w-3xl mx-auto mb-10 opacity-0 animate-fade-in-up delay-200 leading-relaxed">
-            An innovative digital ecosystem connecting parents and students with high-quality activity providers.
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 opacity-0 animate-fade-in-up delay-300">
-            <Link
-              href="/contact"
-              className="bg-white text-[var(--aqua-dark)] hover:bg-gray-50 px-8 py-4 rounded-xl text-lg font-semibold whitespace-nowrap w-full sm:w-auto transition-all shadow-lg hover:shadow-xl"
-            >
-              Become a Partner
-            </Link>
-            <Link
-              href="/about"
-              className="px-8 py-4 rounded-xl text-lg font-semibold bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-all w-full sm:w-auto border border-white/30"
-            >
-              Learn More
-            </Link>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto opacity-0 animate-fade-in-up delay-400">
-            {[
-              { value: "3 Years", label: "Free Access" },
-              { value: "2-3x", label: "Business Growth" },
-              { value: "100%", label: "AI Powered" },
-              { value: "24/7", label: "Support" },
-            ].map((stat, index) => (
-              <div
-                key={index}
-                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 hover:scale-105 transition-transform hover:bg-white/15"
-              >
-                <div className="text-2xl md:text-3xl font-bold text-white mb-1" style={{ fontFamily: "var(--font-bricolage)" }}>
-                  {stat.value}
+        
+        <div className="hero-container">
+          <div className="hero-content">
+            {/* Left Side - Main Content */}
+            <div className="hero-left">
+              <div className="hero-text">
+                {/* Logo */}
+                <div className="logo-section">
+                  <Image
+                    src="/logo-white.png"
+                    alt="Ganimi Logo"
+                    width={120}
+                    height={120}
+                    className="hero-logo"
+                    priority
+                  />
                 </div>
-                <div className="text-sm text-blue-100">{stat.label}</div>
+
+                {/* Event Badge */}
+                <div className="event-badge">
+                  <span>Vendor Partnership Program</span>
+                </div>
+                
+                <h1 className="hero-title">
+                  <span className="gradient-text">Life is all about success and satisfaction</span>
+                </h1>
+                
+                <h2 className="hero-subtitle">
+                  An innovative digital ecosystem connecting parents and students with high-quality activity providers
+                </h2>
+                
+                <div className="hero-highlight">
+                  <span>Gain unmatched visibility, branding opportunities, and access to an engaged audience</span>
+                </div>
+                
+                <div className="hero-details">
+                  <div className="detail-item detail-item-enhanced">
+                    <div className="detail-icon-wrapper">
+                      <svg className="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div className="detail-content">
+                      <span className="detail-label">3 Years</span>
+                      <span className="detail-value">Free Access</span>
+                    </div>
+                  </div>
+                  <div className="detail-item detail-item-enhanced">
+                    <div className="detail-icon-wrapper">
+                      <svg className="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                      </svg>
+                    </div>
+                    <div className="detail-content">
+                      <span className="detail-label">2-3x</span>
+                      <span className="detail-value">Business Growth</span>
+                    </div>
+                  </div>
+                  <div className="detail-item detail-item-enhanced">
+                    <div className="detail-icon-wrapper">
+                      <svg className="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div className="detail-content">
+                      <span className="detail-label">AI-Powered</span>
+                      <span className="detail-value">Platform</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="hero-actions">
+                  <Link href="/contact" className="btn btn-green hero-btn primary-btn">
+                    Become a Partner
+                  </Link>
+                  <Link href="/about" className="btn btn-secondary hero-btn secondary-btn">
+                    Learn More
+                  </Link>
+                </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Key Benefits Section */}
-      <section className="px-6 py-16 md:py-24">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 opacity-0 animate-fade-in-up">
-            <h2
-              className="text-3xl md:text-4xl font-bold mb-4"
-              style={{ fontFamily: "var(--font-bricolage)" }}
-            >
-              Why Partner with <span className="text-gradient">Ganimi?</span>
-            </h2>
-          </div>
+      <section id="benefits" className="section interactive-section">
+        <div className="container">
+          <h2 className="section-title animate-on-scroll">
+            Why Partner with <span className="gradient-text">Ganimi?</span>
+          </h2>
+          <p className="section-subtitle animate-on-scroll">
+            Comprehensive benefits designed to help your business thrive
+          </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { title: "Massive Visibility", desc: "Reach thousands of searching parents" },
-              { title: "Smart Discovery", desc: "Found by age, location, and category filters" },
-              { title: "Verified Badge", desc: "Enhanced brand credibility and trust" },
-              { title: "Analytics Dashboard", desc: "Track parent interest and engagement" },
-              { title: "Network Access", desc: "Connect with schools and educators" },
-              { title: "Cost-Effective", desc: "Grow without heavy marketing spend" },
+              { 
+                title: "Massive Visibility", 
+                desc: "Reach thousands of searching parents",
+                icon: "M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+              },
+              { 
+                title: "Smart Discovery", 
+                desc: "Found by age, location, and category filters",
+                icon: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              },
+              { 
+                title: "Verified Badge", 
+                desc: "Enhanced brand credibility and trust",
+                icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              },
+              { 
+                title: "Analytics Dashboard", 
+                desc: "Track parent interest and engagement",
+                icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+              },
+              { 
+                title: "Network Access", 
+                desc: "Connect with schools and educators",
+                icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+              },
+              { 
+                title: "Cost-Effective", 
+                desc: "Grow without heavy marketing spend",
+                icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              },
             ].map((benefit, index) => (
-              <div
-                key={index}
-                className="glow-card rounded-xl p-6 opacity-0 animate-fade-in-up hover:scale-105 transition-transform"
-                style={{ animationDelay: `${200 + index * 50}ms` }}
-              >
-                <h3 className="font-semibold text-lg mb-2 text-[var(--foreground)]">{benefit.title}</h3>
-                <p className="text-sm text-[var(--muted)]">{benefit.desc}</p>
+              <div key={index} className="card benefit-card animate-on-scroll" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className="benefit-icon">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={benefit.icon} />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-2" style={{ color: "#111827" }}>{benefit.title}</h3>
+                <p style={{ color: "#4b5563" }}>{benefit.desc}</p>
               </div>
             ))}
           </div>
@@ -217,334 +335,247 @@ export default function HomePage() {
       </section>
 
       {/* Offers for Vendor Section */}
-      <section className="px-6 py-16 md:py-24 bg-gradient-to-b from-transparent to-[var(--surface-light)]/50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 opacity-0 animate-fade-in-up">
-            <h2
-              className="text-3xl md:text-4xl font-bold mb-4"
-              style={{ fontFamily: "var(--font-bricolage)" }}
-            >
-              Offers for <span className="text-gradient">Vendor</span>
-            </h2>
-            <p className="text-[var(--muted)] max-w-2xl mx-auto">
-              Comprehensive benefits designed to help your business thrive
-            </p>
-          </div>
+      <section id="offers" className="section interactive-section offers-section" style={{ background: "var(--gray-50)" }}>
+        <div className="container">
+          <h2 className="section-title animate-on-scroll">
+            Offers for <span className="gradient-text">Vendor</span>
+          </h2>
+          <p className="section-subtitle animate-on-scroll">
+            Comprehensive benefits designed to help your business thrive
+          </p>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {offersForVendor.map((offer, index) => (
-              <div
-                key={index}
-                className="glow-card rounded-xl p-6 opacity-0 animate-fade-in-up"
-                style={{ animationDelay: `${300 + index * 50}ms` }}
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 rounded-lg bg-[var(--aqua)]/10 flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg
-                      className="w-5 h-5 text-[var(--aqua)]"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
+          {/* Category Tabs */}
+          <div className="offer-categories-tabs animate-on-scroll">
+            {Object.entries(offerCategories)
+              .filter(([key]) => {
+                if (key === "all") return true;
+                const hasOffers = allOffersForVendor.some(offer => offer.category === key);
+                return hasOffers;
+              })
+              .map(([key, category]) => {
+                const offerCount = key === "all" 
+                  ? allOffersForVendor.length 
+                  : allOffersForVendor.filter(offer => offer.category === key).length;
+                
+                return (
+                  <button
+                    key={key}
+                    onClick={() => {
+                      setSelectedOfferCategory(key);
+                    }}
+                    className={`offer-category-tab ${selectedOfferCategory === key ? "active" : ""}`}
+                  >
+                    <svg className="category-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={category.icon} />
                     </svg>
-                  </div>
-                  <p className="font-medium text-[var(--foreground)]">{offer}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Exclusive Partnership Benefits Section */}
-      <section className="px-6 py-16 md:py-24">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 opacity-0 animate-fade-in-up">
-            <h2
-              className="text-3xl md:text-4xl font-bold mb-4"
-              style={{ fontFamily: "var(--font-bricolage)" }}
-            >
-              Exclusive Partnership <span className="text-gradient">Benefits</span>
-            </h2>
-            <p className="text-[var(--muted)] max-w-2xl mx-auto">
-              Special advantages reserved for our valued vendor partners
-            </p>
+                    <span>{category.name}</span>
+                    {offerCount > 0 && (
+                      <span className="offer-count-badge">{offerCount}</span>
+                    )}
+                  </button>
+                );
+              })}
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              "1 Year free access to the full vendor dashboard including leads & analytics",
-              "3 Years free access for the first 10 vendors in each activity category",
-              "Featured visibility on the platform's home and category pages",
-              "Recognition and stage felicitation at the Parenting Conference",
-              "Dedicated vendor profile including photos, videos, timings, and reviews",
-              "Participation opportunities in student exhibitions and school outreach events",
-              "Brand promotion through Ganimi social media, newsletters, and campaigns",
-              "Access to demographic analytics, interest hotspots, and age-group trends",
-              "Opportunity to collaborate in regional and national skill-development events",
-            ].map((benefit, index) => (
-              <div
-                key={index}
-                className="glow-card rounded-xl p-6 opacity-0 animate-fade-in-up"
-                style={{ animationDelay: `${400 + index * 50}ms` }}
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--aqua)] to-[var(--aqua-dark)] flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg
-                      className="w-5 h-5 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-                      />
-                    </svg>
-                  </div>
-                  <p className="font-medium text-[var(--foreground)]">{benefit}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive Membership Program Section */}
-      <section className="px-6 py-16 md:py-24 bg-gradient-to-b from-transparent to-[var(--surface-light)]/50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 opacity-0 animate-fade-in-up">
-            <h2
-              className="text-3xl md:text-4xl font-bold mb-4"
-              style={{ fontFamily: "var(--font-bricolage)" }}
-            >
-              Membership Card <span className="text-gradient">Program</span>
-            </h2>
-            <p className="text-[var(--muted)] max-w-2xl mx-auto">
-              Exclusive recognition tiers with premium benefits
-            </p>
-          </div>
-
-          {/* Tier Selector */}
-          <div className="flex flex-wrap justify-center gap-4 mb-8 opacity-0 animate-fade-in-up delay-100">
-            {[
-              { name: "Platinum", color: "from-gray-400 to-gray-600" },
-              { name: "Diamond", color: "from-blue-300 to-blue-500" },
-              { name: "Gold", color: "from-yellow-400 to-yellow-600" },
-              { name: "Silver", color: "from-gray-300 to-gray-500" },
-            ].map((tier, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedTier(index)}
-                className={`px-6 py-3 rounded-xl font-semibold transition-all ${
-                  selectedTier === index
-                    ? "bg-gradient-to-r " + tier.color + " text-white shadow-lg scale-105"
-                    : "bg-[var(--surface)] border border-[var(--aqua)]/20 text-[var(--foreground)] hover:border-[var(--aqua)]/40"
-                }`}
-              >
-                {tier.name}
-              </button>
-            ))}
-          </div>
-
-          {/* Tier Details Display */}
-          <div className="glow-card rounded-3xl p-8 md:p-12 opacity-0 animate-fade-in-up delay-200">
+          {/* Offers Grid */}
+          <div className="offers-grid">
             {(() => {
-              const tiers = [
-                {
-                  name: "Platinum",
-                  visibility: "Maximum – priority search placement",
-                  privileges: "Elite privileges, premium promo slots, spotlight features",
-                  networking: "Exclusive leadership circles, direct school introductions",
-                  events: "VIP + backstage + premium conference seating",
-                  description: "Premium status with highest brand exposure, exclusive backstage event access, personal consultations, masterclass invitations, and unmatched promotional positioning.",
-                },
-                {
-                  name: "Diamond",
-                  visibility: "High – prioritized category visibility",
-                  privileges: "Premium promotional support, highlighted vendor card",
-                  networking: "Priority vendor networking sessions",
-                  events: "VIP access to events & conferences",
-                  description: "Strong visibility and advanced promotional opportunities, with access to priority networking and VIP privileges.",
-                },
-                {
-                  name: "Gold",
-                  visibility: "Medium – boosted visibility",
-                  privileges: "Enhanced listing, scheduled highlight rotations",
-                  networking: "General networking access",
-                  events: "Full event entry",
-                  description: "Ideal mid-tier position offering consistent visibility, scheduled spotlight rotations, and general networking benefits.",
-                },
-                {
-                  name: "Silver",
-                  visibility: "Basic – essential visibility",
-                  privileges: "Standard listing & basic promotional support",
-                  networking: "Limited networking circles",
-                  events: "Basic access to community events",
-                  description: "Entry-level tier offering essential exposure ideal for new or growing vendors.",
-                },
-              ];
-              const tier = tiers[selectedTier];
-              return (
-                <div className="space-y-6">
-                  <div className="text-center">
-                    <h3 className="text-2xl md:text-3xl font-bold mb-2" style={{ fontFamily: "var(--font-bricolage)" }}>
-                      {tier.name} Tier
-                    </h3>
-                    <p className="text-[var(--muted)]">{tier.description}</p>
+              // Simple direct filtering - no useMemo
+              let filteredOffers = allOffersForVendor;
+              
+              if (selectedOfferCategory !== "all") {
+                filteredOffers = allOffersForVendor.filter(
+                  offer => offer.category === selectedOfferCategory
+                );
+              }
+              
+              // Sort featured first
+              const sortedOffers = [...filteredOffers].sort((a, b) => {
+                if (a.highlight && !b.highlight) return -1;
+                if (!a.highlight && b.highlight) return 1;
+                return 0;
+              });
+              
+              if (sortedOffers.length === 0) {
+                return (
+                  <div className="no-offers-message">
+                    <p>No offers available in this category.</p>
                   </div>
-                  <div className="grid md:grid-cols-2 gap-6 pt-6 border-t border-[var(--aqua)]/10">
-                    <div>
-                      <h4 className="font-semibold text-[var(--foreground)] mb-2 flex items-center gap-2">
-                        <svg className="w-5 h-5 text-[var(--aqua)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                        Brand Visibility
-                      </h4>
-                      <p className="text-[var(--muted)]">{tier.visibility}</p>
+                );
+              }
+              
+              return sortedOffers.map((offer) => (
+                <div
+                  key={offer.id}
+                  className={`offer-card-enhanced ${offer.highlight ? "highlighted" : ""}`}
+                >
+                  {offer.highlight && (
+                    <div className="offer-featured-badge">
+                      <svg className="featured-star-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                      </svg>
+                      <span>Featured</span>
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-[var(--foreground)] mb-2 flex items-center gap-2">
-                        <svg className="w-5 h-5 text-[var(--aqua)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                        Privileges
-                      </h4>
-                      <p className="text-[var(--muted)]">{tier.privileges}</p>
+                  )}
+                  <div className="offer-card-content">
+                    <div className="offer-card-icon-wrapper">
+                      <svg className="offer-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-[var(--foreground)] mb-2 flex items-center gap-2">
-                        <svg className="w-5 h-5 text-[var(--aqua)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                        Networking
-                      </h4>
-                      <p className="text-[var(--muted)]">{tier.networking}</p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-[var(--foreground)] mb-2 flex items-center gap-2">
-                        <svg className="w-5 h-5 text-[var(--aqua)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        Event Access
-                      </h4>
-                      <p className="text-[var(--muted)]">{tier.events}</p>
+                    <div className="offer-card-text">
+                      <p className="offer-text">{offer.text}</p>
                     </div>
                   </div>
                 </div>
-              );
+              ));
             })()}
           </div>
         </div>
       </section>
 
-      {/* Platform Features Section */}
-      <section className="px-6 py-16 md:py-24">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 opacity-0 animate-fade-in-up">
-            <h2
-              className="text-3xl md:text-4xl font-bold mb-4"
-              style={{ fontFamily: "var(--font-bricolage)" }}
-            >
-              Powerful <span className="text-gradient">Platform Tools</span>
-            </h2>
-          </div>
+      {/* Membership Tiers Section */}
+      <section id="membership" className="section interactive-section membership-section">
+        <div className="container">
+          <h2 className="section-title animate-on-scroll">
+            Membership <span className="gradient-text">Tiers</span>
+          </h2>
+          <p className="section-subtitle animate-on-scroll">
+            Choose the membership level that best fits your business needs
+          </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {benefitsToVendor.map((benefit, index) => (
-              <div
-                key={index}
-                className="glow-card rounded-xl p-6 text-center opacity-0 animate-fade-in-up hover:scale-105 transition-transform"
-                style={{ animationDelay: `${300 + index * 100}ms` }}
-              >
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--aqua)] to-[var(--aqua-dark)] flex items-center justify-center mx-auto mb-4">
-                  <svg
-                    className="w-7 h-7 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
+          <div className="membership-grid">
+            {membershipTiers.map((tier, index) => {
+              const tierColors = [
+                { 
+                  bg: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", 
+                  border: "#667eea", 
+                  icon: "#764ba2",
+                  light: "rgba(102, 126, 234, 0.1)"
+                },
+                { 
+                  bg: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)", 
+                  border: "#f5576c", 
+                  icon: "#f5576c",
+                  light: "rgba(245, 87, 108, 0.1)"
+                },
+                { 
+                  bg: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)", 
+                  border: "#00f2fe", 
+                  icon: "#00f2fe",
+                  light: "rgba(79, 172, 254, 0.1)"
+                },
+                { 
+                  bg: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)", 
+                  border: "#38f9d7", 
+                  icon: "#38f9d7",
+                  light: "rgba(67, 233, 123, 0.1)"
+                },
+              ];
+              const colors = tierColors[index];
+              const isSelected = selectedTier === index;
+              
+              return (
+                <div
+                  key={index}
+                  onClick={() => setSelectedTier(index)}
+                  className={`membership-tier-card ${isSelected ? "selected" : ""} ${tier.popular ? "popular" : ""}`}
+                  style={{
+                    background: isSelected ? colors.bg : "#ffffff",
+                    borderColor: isSelected ? colors.border : "#e5e7eb",
+                    color: isSelected ? "#ffffff" : "#111827",
+                  }}
+                >
+                  {tier.popular && (
+                    <div className="popular-badge">
+                      <span>Most Popular</span>
+                    </div>
+                  )}
+                  
+                  <div className="membership-tier-header">
+                    <div 
+                      className="membership-tier-icon"
+                      style={{ 
+                        background: isSelected ? "rgba(255, 255, 255, 0.2)" : colors.bg,
+                        color: isSelected ? "#ffffff" : "#ffffff"
+                      }}
+                    >
+                      {index === 0 && "👑"}
+                      {index === 1 && "💎"}
+                      {index === 2 && "⭐"}
+                      {index === 3 && "✨"}
+                    </div>
+                    <div className="membership-tier-title">
+                      <h3 className="membership-tier-name">{tier.name}</h3>
+                      <p className="membership-tier-subtitle">Membership</p>
+                    </div>
+                  </div>
+                  
+                  <div className="membership-tier-content">
+                    <p className="membership-tier-description" style={{ color: isSelected ? "rgba(255, 255, 255, 0.95)" : "#4b5563" }}>
+                      {tier.description}
+                    </p>
+                    
+                    <div className="membership-features">
+                      <h4 className="features-title" style={{ color: isSelected ? "#ffffff" : "#111827" }}>
+                        Key Features:
+                      </h4>
+                      <ul className="features-list">
+                        {tier.features.map((feature, featureIndex) => (
+                          <li 
+                            key={featureIndex}
+                            style={{ color: isSelected ? "rgba(255, 255, 255, 0.9)" : "#4b5563" }}
+                          >
+                            <svg className="feature-check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: isSelected ? "#ffffff" : colors.border }}>
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  {isSelected && (
+                    <div className="membership-tier-badge">
+                      <svg className="badge-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Selected</span>
+                    </div>
+                  )}
                 </div>
-                <h3 className="font-semibold text-lg mb-2">{benefit}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="px-6 py-16 md:py-24 bg-gradient-to-b from-transparent to-[var(--surface-light)]/50">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="glow-card rounded-3xl p-8 md:p-12 opacity-0 animate-fade-in-up">
-            <h2
-              className="text-2xl md:text-3xl font-bold mb-4"
-              style={{ fontFamily: "var(--font-bricolage)" }}
-            >
-              Ready to <span className="text-gradient">Partner</span> with Us?
-            </h2>
-            <p className="text-lg text-[var(--muted)] mb-8">
-              Join the Ganimi Vendor Ecosystem and transform your business growth.
-            </p>
-            <Link
-              href="/contact"
-              className="btn-aqua inline-block px-8 py-4 rounded-xl text-base font-semibold"
-            >
-              Get Started
-            </Link>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="px-6 py-16 md:py-24 bg-gradient-to-b from-transparent to-[var(--surface-light)]/50">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12 opacity-0 animate-fade-in-up">
-            <h2
-              className="text-3xl md:text-4xl font-bold mb-4"
-              style={{ fontFamily: "var(--font-bricolage)" }}
-            >
-              Frequently Asked <span className="text-gradient">Questions</span>
-            </h2>
-            <p className="text-[var(--muted)]">
-              Everything you need to know about partnering with us
-            </p>
-          </div>
+      <section className="section interactive-section" style={{ background: "var(--gray-50)" }}>
+        <div className="container">
+          <h2 className="section-title animate-on-scroll">Frequently Asked Questions</h2>
+          <p className="section-subtitle animate-on-scroll">
+            Everything you need to know about becoming a Ganimi Partner
+          </p>
 
-          <div className="space-y-4">
+          <div className="max-w-3xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className="glow-card rounded-xl overflow-hidden opacity-0 animate-fade-in-up"
-                style={{ animationDelay: `${600 + index * 100}ms` }}
-              >
+              <div key={index} className="card faq-card animate-on-scroll" style={{ animationDelay: `${index * 0.1}s` }}>
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-[var(--surface-light)]/50 transition-colors"
+                  className="w-full text-left flex justify-between items-center"
+                  style={{ color: "#111827" }}
                 >
-                  <span className="font-semibold text-lg pr-4">{faq.question}</span>
+                  <h3 className="font-semibold text-lg">{faq.question}</h3>
                   <svg
-                    className={`w-6 h-6 text-[var(--aqua)] flex-shrink-0 transition-transform ${
+                    className={`w-5 h-5 transition-transform ${
                       openFaq === index ? "rotate-180" : ""
                     }`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    style={{ color: "#0086c3" }}
                   >
                     <path
                       strokeLinecap="round"
@@ -555,40 +586,15 @@ export default function HomePage() {
                   </svg>
                 </button>
                 {openFaq === index && (
-                  <div className="px-6 pb-5 animate-fade-in">
-                    <p className="text-[var(--muted)] leading-relaxed">{faq.answer}</p>
-                  </div>
+                  <p className="mt-4" style={{ color: "#4b5563" }}>{faq.answer}</p>
                 )}
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="px-6 py-8 border-t border-[var(--aqua)]/10">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[var(--muted)]">
-          <p>© 2025 Ganimi Partners. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <Link href="/home" className="hover:text-[var(--aqua)] transition-colors">
-              Home
-            </Link>
-            <Link href="/about" className="hover:text-[var(--aqua)] transition-colors">
-              About Us
-            </Link>
-            <Link href="/contact" className="hover:text-[var(--aqua)] transition-colors">
-              Contact
-            </Link>
-            <a href="#" className="hover:text-[var(--aqua)] transition-colors">
-              Privacy
-            </a>
-            <a href="#" className="hover:text-[var(--aqua)] transition-colors">
-              Terms
-            </a>
-          </div>
-        </div>
-      </footer>
+      
+      <Footer />
     </main>
   );
 }
-

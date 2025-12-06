@@ -1,0 +1,47 @@
+/* Documents Page Styles */
+.document-card {
+  position: relative;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.document-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.document-icon {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #0086c3, #1d4ed8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.document-meta {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.document-type {
+  padding: 0.25rem 0.75rem;
+  background: rgba(0, 134, 195, 0.1);
+  color: #0086c3;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.document-size {
+  color: #6b7280;
+  font-family: 'Montserrat', sans-serif !important;
+}
+

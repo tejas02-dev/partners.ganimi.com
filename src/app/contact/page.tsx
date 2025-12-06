@@ -1,9 +1,44 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+import { useState, useEffect } from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function ContactPage() {
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, observerOptions);
+
+    // Small delay to ensure DOM is ready
+    setTimeout(() => {
+      const elements = document.querySelectorAll(".animate-on-scroll");
+      elements.forEach((el) => {
+        // Check if element is already in viewport
+        const rect = el.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        if (isVisible) {
+          el.classList.add("visible");
+        } else {
+          observer.observe(el);
+        }
+      });
+    }, 100);
+
+    return () => {
+      const elements = document.querySelectorAll(".animate-on-scroll");
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
   const [formData, setFormData] = useState({
     vendorName: "",
     vendorCategory: "",
@@ -53,60 +88,28 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col">
-      {/* Navigation */}
-      <nav className="w-full px-6 py-6 animate-fade-in">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link href="/home" className="flex items-center gap-3">
-            <span className="text-xl font-semibold tracking-tight">
-              Ganimi <span className="text-[var(--muted)]">Partners</span>
-            </span>
-          </Link>
-          <div className="flex items-center gap-6">
-            <Link
-              href="/home"
-              className="text-sm font-medium text-[var(--muted)] hover:text-[var(--aqua)] transition-colors"
-            >
-              Home
-            </Link>
-            <Link
-              href="/about"
-              className="text-sm font-medium text-[var(--muted)] hover:text-[var(--aqua)] transition-colors"
-            >
-              About Us
-            </Link>
-            <Link
-              href="/contact"
-              className="text-sm font-medium text-[var(--foreground)] hover:text-[var(--aqua)] transition-colors"
-            >
-              Contact
-            </Link>
-          </div>
-        </div>
-      </nav>
+    <main className="min-h-screen flex flex-col" style={{ paddingTop: "80px" }}>
+      <Navbar />
 
       {/* Hero Section */}
-      <section className="flex-1 flex items-center justify-center px-6 py-12 md:py-16">
-        <div className="max-w-4xl mx-auto w-full">
-          <div className="text-center mb-12 opacity-0 animate-fade-in-up">
-            <h1
-              className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4"
-              style={{ fontFamily: "var(--font-bricolage)" }}
-            >
-              Become a <span className="text-gradient">Vendor Partner</span>
+      <section className="section flex items-center justify-center">
+        <div className="container max-w-4xl">
+          <div className="text-center mb-12 animate-on-scroll">
+            <h1 className="section-title">
+              Become a <span className="gradient-text">Vendor Partner</span>
             </h1>
-            <p className="text-lg text-[var(--muted)] max-w-2xl mx-auto">
+            <p className="section-subtitle">
               Fill out the form below to join our partner network and start growing your business
             </p>
           </div>
 
           {!isSubmitted ? (
-            <form onSubmit={handleSubmit} className="glow-card rounded-3xl p-8 md:p-12 opacity-0 animate-fade-in-up delay-100">
+            <form onSubmit={handleSubmit} className="card p-8 md:p-12 animate-on-scroll">
               <div className="grid md:grid-cols-2 gap-6">
                 {/* Vendor Name */}
                 <div className="md:col-span-2">
-                  <label htmlFor="vendorName" className="block text-sm font-semibold mb-2 text-[var(--foreground)]">
-                    Vendor Name <span className="text-[var(--aqua)]">*</span>
+                  <label htmlFor="vendorName" className="block text-sm font-semibold mb-2 text-[var(--gray-800)]">
+                    Vendor Name <span className="text-[var(--primary-blue)]">*</span>
                   </label>
                   <input
                     type="text"
@@ -115,15 +118,15 @@ export default function ContactPage() {
                     value={formData.vendorName}
                     onChange={handleChange}
                     required
-                    className="input-aqua w-full px-5 py-4 rounded-xl text-base"
+                    className="w-full px-5 py-4 rounded-xl text-base border border-[var(--gray-300)] focus:border-[var(--primary-blue)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]/20 transition-colors"
                     placeholder="Enter your vendor/business name"
                   />
                 </div>
 
                 {/* Vendor Category */}
                 <div>
-                  <label htmlFor="vendorCategory" className="block text-sm font-semibold mb-2 text-[var(--foreground)]">
-                    Vendor Category <span className="text-[var(--aqua)]">*</span>
+                  <label htmlFor="vendorCategory" className="block text-sm font-semibold mb-2 text-[var(--gray-800)]">
+                    Vendor Category <span className="text-[var(--primary-blue)]">*</span>
                   </label>
                   <select
                     id="vendorCategory"
@@ -131,24 +134,22 @@ export default function ContactPage() {
                     value={formData.vendorCategory}
                     onChange={handleChange}
                     required
-                    className="input-aqua w-full px-5 py-4 rounded-xl text-base"
+                    className="w-full px-5 py-4 rounded-xl text-base border border-[var(--gray-300)] focus:border-[var(--primary-blue)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]/20 transition-colors"
                   >
                     <option value="">Select category</option>
+                    <option value="computer-skills">Computer Skills</option>
+                    <option value="adventure">Adventure</option>
                     <option value="academics">Academics</option>
+                    <option value="performing-arts">Performing Arts</option>
                     <option value="sports">Sports</option>
-                    <option value="arts">Arts & Music</option>
-                    <option value="dance">Dance</option>
-                    <option value="technology">Technology & Coding</option>
-                    <option value="language">Language Learning</option>
-                    <option value="life-skills">Life Skills</option>
-                    <option value="other">Other</option>
+                    <option value="necessary-life-skills">Necessary Life Skills</option>
                   </select>
                 </div>
 
                 {/* Contact Person */}
                 <div>
-                  <label htmlFor="contactPerson" className="block text-sm font-semibold mb-2 text-[var(--foreground)]">
-                    Contact Person <span className="text-[var(--aqua)]">*</span>
+                  <label htmlFor="contactPerson" className="block text-sm font-semibold mb-2 text-[var(--gray-800)]">
+                    Contact Person <span className="text-[var(--primary-blue)]">*</span>
                   </label>
                   <input
                     type="text"
@@ -157,15 +158,15 @@ export default function ContactPage() {
                     value={formData.contactPerson}
                     onChange={handleChange}
                     required
-                    className="input-aqua w-full px-5 py-4 rounded-xl text-base"
+                    className="w-full px-5 py-4 rounded-xl text-base border border-[var(--gray-300)] focus:border-[var(--primary-blue)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]/20 transition-colors"
                     placeholder="Full name"
                   />
                 </div>
 
                 {/* Phone Number */}
                 <div>
-                  <label htmlFor="phoneNumber" className="block text-sm font-semibold mb-2 text-[var(--foreground)]">
-                    Phone Number <span className="text-[var(--aqua)]">*</span>
+                  <label htmlFor="phoneNumber" className="block text-sm font-semibold mb-2 text-[var(--gray-800)]">
+                    Phone Number <span className="text-[var(--primary-blue)]">*</span>
                   </label>
                   <input
                     type="tel"
@@ -174,15 +175,15 @@ export default function ContactPage() {
                     value={formData.phoneNumber}
                     onChange={handleChange}
                     required
-                    className="input-aqua w-full px-5 py-4 rounded-xl text-base"
+                    className="w-full px-5 py-4 rounded-xl text-base border border-[var(--gray-300)] focus:border-[var(--primary-blue)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]/20 transition-colors"
                     placeholder="+91 1234567890"
                   />
                 </div>
 
                 {/* Email Address */}
                 <div>
-                  <label htmlFor="emailAddress" className="block text-sm font-semibold mb-2 text-[var(--foreground)]">
-                    Email Address <span className="text-[var(--aqua)]">*</span>
+                  <label htmlFor="emailAddress" className="block text-sm font-semibold mb-2 text-[var(--gray-800)]">
+                    Email Address <span className="text-[var(--primary-blue)]">*</span>
                   </label>
                   <input
                     type="email"
@@ -191,15 +192,15 @@ export default function ContactPage() {
                     value={formData.emailAddress}
                     onChange={handleChange}
                     required
-                    className="input-aqua w-full px-5 py-4 rounded-xl text-base"
+                    className="w-full px-5 py-4 rounded-xl text-base border border-[var(--gray-300)] focus:border-[var(--primary-blue)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]/20 transition-colors"
                     placeholder="your@email.com"
                   />
                 </div>
 
                 {/* Business Address */}
                 <div className="md:col-span-2">
-                  <label htmlFor="businessAddress" className="block text-sm font-semibold mb-2 text-[var(--foreground)]">
-                    Business Address <span className="text-[var(--aqua)]">*</span>
+                  <label htmlFor="businessAddress" className="block text-sm font-semibold mb-2 text-[var(--gray-800)]">
+                    Business Address <span className="text-[var(--primary-blue)]">*</span>
                   </label>
                   <textarea
                     id="businessAddress"
@@ -208,15 +209,15 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     rows={3}
-                    className="input-aqua w-full px-5 py-4 rounded-xl text-base resize-none"
+                    className="w-full px-5 py-4 rounded-xl text-base resize-none border border-[var(--gray-300)] focus:border-[var(--primary-blue)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]/20 transition-colors"
                     placeholder="Enter your complete business address"
                   />
                 </div>
 
                 {/* Programs Offered */}
                 <div className="md:col-span-2">
-                  <label htmlFor="programsOffered" className="block text-sm font-semibold mb-2 text-[var(--foreground)]">
-                    Programs Offered <span className="text-[var(--aqua)]">*</span>
+                  <label htmlFor="programsOffered" className="block text-sm font-semibold mb-2 text-[var(--gray-800)]">
+                    Programs Offered <span className="text-[var(--primary-blue)]">*</span>
                   </label>
                   <textarea
                     id="programsOffered"
@@ -225,15 +226,15 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     rows={3}
-                    className="input-aqua w-full px-5 py-4 rounded-xl text-base resize-none"
+                    className="w-full px-5 py-4 rounded-xl text-base resize-none border border-[var(--gray-300)] focus:border-[var(--primary-blue)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]/20 transition-colors"
                     placeholder="List all programs, courses, or services you offer"
                   />
                 </div>
 
                 {/* Target Age Group */}
                 <div>
-                  <label htmlFor="targetAgeGroup" className="block text-sm font-semibold mb-2 text-[var(--foreground)]">
-                    Target Age Group <span className="text-[var(--aqua)]">*</span>
+                  <label htmlFor="targetAgeGroup" className="block text-sm font-semibold mb-2 text-[var(--gray-800)]">
+                    Target Age Group <span className="text-[var(--primary-blue)]">*</span>
                   </label>
                   <select
                     id="targetAgeGroup"
@@ -241,7 +242,7 @@ export default function ContactPage() {
                     value={formData.targetAgeGroup}
                     onChange={handleChange}
                     required
-                    className="input-aqua w-full px-5 py-4 rounded-xl text-base"
+                    className="w-full px-5 py-4 rounded-xl text-base border border-[var(--gray-300)] focus:border-[var(--primary-blue)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]/20 transition-colors"
                   >
                     <option value="">Select age group</option>
                     <option value="3-6">3-6 years (Preschool)</option>
@@ -255,7 +256,7 @@ export default function ContactPage() {
 
                 {/* Website / Social Media */}
                 <div>
-                  <label htmlFor="websiteSocialMedia" className="block text-sm font-semibold mb-2 text-[var(--foreground)]">
+                  <label htmlFor="websiteSocialMedia" className="block text-sm font-semibold mb-2 text-[var(--gray-800)]">
                     Website / Social Media
                   </label>
                   <input
@@ -264,15 +265,15 @@ export default function ContactPage() {
                     name="websiteSocialMedia"
                     value={formData.websiteSocialMedia}
                     onChange={handleChange}
-                    className="input-aqua w-full px-5 py-4 rounded-xl text-base"
+                    className="w-full px-5 py-4 rounded-xl text-base border border-[var(--gray-300)] focus:border-[var(--primary-blue)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]/20 transition-colors"
                     placeholder="https://yourwebsite.com or social media links"
                   />
                 </div>
 
                 {/* Years of Experience */}
                 <div>
-                  <label htmlFor="yearsOfExperience" className="block text-sm font-semibold mb-2 text-[var(--foreground)]">
-                    Years of Experience <span className="text-[var(--aqua)]">*</span>
+                  <label htmlFor="yearsOfExperience" className="block text-sm font-semibold mb-2 text-[var(--gray-800)]">
+                    Years of Experience <span className="text-[var(--primary-blue)]">*</span>
                   </label>
                   <input
                     type="number"
@@ -282,14 +283,14 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     min="0"
-                    className="input-aqua w-full px-5 py-4 rounded-xl text-base"
+                    className="w-full px-5 py-4 rounded-xl text-base border border-[var(--gray-300)] focus:border-[var(--primary-blue)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]/20 transition-colors"
                     placeholder="e.g., 5"
                   />
                 </div>
 
                 {/* Preferred Event Participation */}
                 <div>
-                  <label htmlFor="preferredEventParticipation" className="block text-sm font-semibold mb-2 text-[var(--foreground)]">
+                  <label htmlFor="preferredEventParticipation" className="block text-sm font-semibold mb-2 text-[var(--gray-800)]">
                     Preferred Event Participation
                   </label>
                   <select
@@ -297,7 +298,7 @@ export default function ContactPage() {
                     name="preferredEventParticipation"
                     value={formData.preferredEventParticipation}
                     onChange={handleChange}
-                    className="input-aqua w-full px-5 py-4 rounded-xl text-base"
+                    className="w-full px-5 py-4 rounded-xl text-base border border-[var(--gray-300)] focus:border-[var(--primary-blue)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]/20 transition-colors"
                   >
                     <option value="">Select preference</option>
                     <option value="exhibitions">Student Exhibitions</option>
@@ -314,7 +315,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="btn-aqua px-8 py-4 rounded-xl text-base font-semibold whitespace-nowrap disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="btn btn-primary px-8 py-4 rounded-xl text-base font-semibold whitespace-nowrap disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {isLoading ? (
                     <span className="flex items-center gap-2">
@@ -343,10 +344,10 @@ export default function ContactPage() {
               </div>
             </form>
           ) : (
-            <div className="glow-card rounded-3xl p-8 md:p-12 text-center opacity-0 animate-fade-in-up">
-              <div className="w-16 h-16 rounded-full bg-[var(--aqua)]/20 flex items-center justify-center mx-auto mb-4">
+            <div className="card p-8 md:p-12 text-center animate-on-scroll">
+              <div className="w-16 h-16 rounded-full bg-[var(--primary-blue)]/20 flex items-center justify-center mx-auto mb-4">
                 <svg
-                  className="w-8 h-8 text-[var(--aqua)]"
+                  className="w-8 h-8 text-[var(--primary-blue)]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -360,12 +361,12 @@ export default function ContactPage() {
                 </svg>
               </div>
               <h2 className="text-2xl md:text-3xl font-bold mb-4">Application Submitted!</h2>
-              <p className="text-lg text-[var(--muted)] mb-6">
+              <p className="text-lg text-[var(--gray-600)] mb-6">
                 Thank you for your interest in becoming a Ganimi Vendor Partner. Our team will review your application and contact you soon.
               </p>
               <button
                 onClick={() => setIsSubmitted(false)}
-                className="btn-aqua px-6 py-3 rounded-xl text-base font-semibold"
+                className="btn btn-primary px-6 py-3 rounded-xl text-base font-semibold"
               >
                 Submit Another Application
               </button>
@@ -374,29 +375,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="px-6 py-8 border-t border-[var(--aqua)]/10">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[var(--muted)]">
-          <p>© 2025 Ganimi Partners. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <Link href="/home" className="hover:text-[var(--aqua)] transition-colors">
-              Home
-            </Link>
-            <Link href="/about" className="hover:text-[var(--aqua)] transition-colors">
-              About Us
-            </Link>
-            <Link href="/contact" className="hover:text-[var(--aqua)] transition-colors">
-              Contact
-            </Link>
-            <a href="#" className="hover:text-[var(--aqua)] transition-colors">
-              Privacy
-            </a>
-            <a href="#" className="hover:text-[var(--aqua)] transition-colors">
-              Terms
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

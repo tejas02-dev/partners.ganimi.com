@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { DM_Sans, Bricolage_Grotesque } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -34,9 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} ${bricolage.variable} antialiased`}>
-        <div className="gradient-bg" />
-        <div className="grid-pattern" />
+      <body className={`${montserrat.variable} antialiased`} style={{ fontFamily: 'var(--font-montserrat), "Montserrat", sans-serif' }}>
         {children}
       </body>
     </html>
