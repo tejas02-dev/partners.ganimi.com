@@ -190,7 +190,7 @@ export default function HomePage() {
         <div className="hero-background">
           <div className="hero-overlay"></div>
           <div className="hero-pattern"></div>
-          <BackgroundBeams />
+          {/* <BackgroundBeams /> */}
         </div>
         
         <div className="hero-container">
