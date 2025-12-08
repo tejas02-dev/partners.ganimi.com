@@ -31,47 +31,52 @@ export default function BenefitsPage() {
     <main className="min-h-screen">
       <Navbar />
       
-      {/* Key Benefits Section */}
-      <section className="section interactive-section" style={{ paddingTop: "6rem" }}>
+      {/* What Do Vendor Partners Get Section */}
+      <section id="vendor-benefits" className="section interactive-section" style={{ paddingTop: "6rem" }}>
         <div className="container">
           <h1 className="section-title animate-on-scroll">
-            Why Partner with <span className="gradient-text">Ganimi?</span>
+            What Do Vendor <span className="gradient-text">Partners Get</span>
           </h1>
           <p className="section-subtitle animate-on-scroll">
-            Comprehensive benefits designed to help your business thrive
+            Tangible Benefits & Growth - Our platform is designed to drive significant, measurable growth and streamline your operations, providing a long-term sustainable business model.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { 
-                title: "Massive Visibility", 
-                desc: "Reach thousands of searching parents",
-                icon: "M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                title: "2x–3x Admission and Business Growth", 
+                desc: "Achieve substantial increases in your enrollment and overall revenue.",
+                icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
               },
               { 
-                title: "Smart Discovery", 
-                desc: "Found by age, location, and category filters",
-                icon: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                title: "Long-Term Sustainable Business", 
+                desc: "Partner with a 10-15 year business model designed for consistent success.",
+                icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               },
               { 
-                title: "Verified Badge", 
-                desc: "Enhanced brand credibility and trust",
-                icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                title: "AI-Integrated Tech Platform / App", 
+                desc: "Access a state-of-the-art platform for superior service delivery and business management.",
+                icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
               },
               { 
-                title: "Analytics Dashboard", 
-                desc: "Track parent interest and engagement",
+                title: "Systematic & Easy Administration", 
+                desc: "Utilize an ERP-Based Data Management system for easy, efficient, and precise administration.",
                 icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
               },
               { 
-                title: "Network Access", 
-                desc: "Connect with schools and educators",
+                title: "Direct Stakeholder Connect", 
+                desc: "Connect directly with students and parents (stakeholders) through the platform.",
                 icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
               },
               { 
-                title: "Cost-Effective", 
-                desc: "Grow without heavy marketing spend",
-                icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                title: "Detailed Reports & Insights", 
+                desc: "Receive comprehensive reports on performance, engagement, and business metrics.",
+                icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+              },
+              { 
+                title: "Access to Important Resources", 
+                desc: "Gain access to specialized tools and resources to support your service/product delivery.",
+                icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
               },
             ].map((benefit, index) => (
               <div key={index} className="card benefit-card animate-on-scroll" style={{ animationDelay: `${index * 0.1}s` }}>
@@ -92,4 +97,3 @@ export default function BenefitsPage() {
     </main>
   );
 }
-

@@ -7,59 +7,6 @@ import Footer from "../components/Footer";
 export default function MembershipPage() {
   const [selectedTier, setSelectedTier] = useState<number>(0);
 
-  const membershipTiers = [
-    {
-      name: "Platinum",
-      description: "Premium status with highest brand exposure, exclusive backstage event access, personal consultations, masterclass invitations, and unmatched promotional positioning.",
-      features: [
-        "Highest brand exposure",
-        "Exclusive backstage access",
-        "Personal consultations",
-        "Masterclass invitations",
-        "Unmatched promotional positioning",
-        "Priority support"
-      ],
-      popular: true,
-    },
-    {
-      name: "Diamond",
-      description: "Strong visibility and advanced promotional opportunities, with access to priority networking and VIP privileges.",
-      features: [
-        "Strong visibility",
-        "Advanced promotional opportunities",
-        "Priority networking",
-        "VIP privileges",
-        "Enhanced analytics",
-        "Dedicated support"
-      ],
-      popular: false,
-    },
-    {
-      name: "Gold",
-      description: "Ideal mid-tier position offering consistent visibility, scheduled spotlight rotations, and general networking benefits.",
-      features: [
-        "Consistent visibility",
-        "Scheduled spotlight rotations",
-        "General networking benefits",
-        "Standard analytics",
-        "Email support"
-      ],
-      popular: false,
-    },
-    {
-      name: "Silver",
-      description: "Entry-level tier offering essential exposure ideal for new or growing vendors.",
-      features: [
-        "Essential exposure",
-        "Basic listing",
-        "Community access",
-        "Basic analytics",
-        "Email support"
-      ],
-      popular: false,
-    },
-  ];
-
   useEffect(() => {
     const observerOptions = {
       threshold: 0.1,
@@ -87,7 +34,7 @@ export default function MembershipPage() {
       <Navbar />
       
       {/* Membership Tiers Section */}
-      <section className="section interactive-section membership-section" style={{ paddingTop: "6rem" }}>
+      <section id="membership" className="section interactive-section membership-section" style={{ paddingTop: "6rem" }}>
         <div className="container">
           <h1 className="section-title animate-on-scroll">
             Membership <span className="gradient-text">Tiers</span>
@@ -97,7 +44,58 @@ export default function MembershipPage() {
           </p>
 
           <div className="membership-grid">
-            {membershipTiers.map((tier, index) => {
+            {[
+              {
+                name: "Platinum",
+                description: "Premium status with highest brand exposure, exclusive backstage event access, personal consultations, masterclass invitations, and unmatched promotional positioning.",
+                features: [
+                  "Highest brand exposure",
+                  "Exclusive backstage access",
+                  "Personal consultations",
+                  "Masterclass invitations",
+                  "Unmatched promotional positioning",
+                  "Priority support"
+                ],
+                popular: true,
+              },
+              {
+                name: "Diamond",
+                description: "Strong visibility and advanced promotional opportunities, with access to priority networking and VIP privileges.",
+                features: [
+                  "Strong visibility",
+                  "Advanced promotional opportunities",
+                  "Priority networking",
+                  "VIP privileges",
+                  "Enhanced analytics",
+                  "Dedicated support"
+                ],
+                popular: false,
+              },
+              {
+                name: "Gold",
+                description: "Ideal mid-tier position offering consistent visibility, scheduled spotlight rotations, and general networking benefits.",
+                features: [
+                  "Consistent visibility",
+                  "Scheduled spotlight rotations",
+                  "General networking benefits",
+                  "Standard analytics",
+                  "Email support"
+                ],
+                popular: false,
+              },
+              {
+                name: "Silver",
+                description: "Entry-level tier offering essential exposure ideal for new or growing vendors.",
+                features: [
+                  "Essential exposure",
+                  "Basic listing",
+                  "Community access",
+                  "Basic analytics",
+                  "Email support"
+                ],
+                popular: false,
+              },
+            ].map((tier, index) => {
               const tierColors = [
                 { 
                   bg: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", 
@@ -207,4 +205,3 @@ export default function MembershipPage() {
     </main>
   );
 }
-

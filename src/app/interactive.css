@@ -115,6 +115,141 @@
   color: #0086c3;
 }
 
+.why-choose-desc {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #4b5563;
+  margin-top: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Collaboration Cards - Different Design from Why Choose Cards */
+.collaboration-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.75rem;
+  border: 2px solid #e5e7eb;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  border-left: 4px solid transparent;
+}
+
+.collaboration-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 134, 195, 0.03) 0%, rgba(29, 78, 216, 0.03) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.collaboration-card:hover::before {
+  opacity: 1;
+}
+
+.collaboration-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 8px 24px rgba(0, 134, 195, 0.12);
+  border-left-color: #0086c3;
+  border-color: #0086c3;
+}
+
+.collaboration-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.collaboration-icon-wrapper {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.collaboration-card:hover .collaboration-icon-wrapper {
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.collaboration-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #ffffff;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.collaboration-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.4;
+  flex: 1;
+  margin: 0;
+  transition: color 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.collaboration-card:hover .collaboration-title {
+  color: #0086c3;
+}
+
+.collaboration-desc {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: #4b5563;
+  margin: 0 0 1rem 0;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.collaboration-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  margin-top: auto;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.collaboration-card:hover .collaboration-footer {
+  border-color: #0086c3;
+}
+
+.collaboration-arrow {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #9ca3af;
+  transition: all 0.3s ease;
+}
+
+.collaboration-card:hover .collaboration-arrow {
+  transform: translateX(4px);
+  color: #0086c3;
+}
+
 /* Offer Cards Enhanced - OLD STYLES - Now using offer-card-enhanced in offers.css */
 /* Keeping for backward compatibility but these won't conflict */
 
