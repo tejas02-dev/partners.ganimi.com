@@ -1,0 +1,419 @@
+/* Interactive Section Styles */
+.interactive-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scroll Animations */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Benefit Cards Enhanced */
+.benefit-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.benefit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 134, 195, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.benefit-card:hover::before {
+  left: 100%;
+}
+
+.benefit-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 134, 195, 0.25);
+}
+
+/* Why Choose Us Cards */
+.why-choose-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 2px solid transparent;
+}
+
+.why-choose-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 134, 195, 0.1), transparent);
+  transition: left 0.5s ease;
+  z-index: 0;
+}
+
+.why-choose-card:hover::before {
+  left: 100%;
+}
+
+.why-choose-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 134, 195, 0.25);
+  border-color: rgba(0, 134, 195, 0.2);
+}
+
+.why-choose-icon-wrapper {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 1.5rem;
+}
+
+.why-choose-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.why-choose-card:hover .why-choose-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.why-choose-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.5;
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.why-choose-card:hover .why-choose-title {
+  color: #0086c3;
+}
+
+.why-choose-desc {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #4b5563;
+  margin-top: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Collaboration Cards - Different Design from Why Choose Cards */
+.collaboration-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.75rem;
+  border: 2px solid #e5e7eb;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  border-left: 4px solid transparent;
+}
+
+.collaboration-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 134, 195, 0.03) 0%, rgba(29, 78, 216, 0.03) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.collaboration-card:hover::before {
+  opacity: 1;
+}
+
+.collaboration-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 8px 24px rgba(0, 134, 195, 0.12);
+  border-left-color: #0086c3;
+  border-color: #0086c3;
+}
+
+.collaboration-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.collaboration-icon-wrapper {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.collaboration-card:hover .collaboration-icon-wrapper {
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.collaboration-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #ffffff;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.collaboration-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.4;
+  flex: 1;
+  margin: 0;
+  transition: color 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.collaboration-card:hover .collaboration-title {
+  color: #0086c3;
+}
+
+.collaboration-desc {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: #4b5563;
+  margin: 0 0 1rem 0;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.collaboration-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  margin-top: auto;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.collaboration-card:hover .collaboration-footer {
+  border-color: #0086c3;
+}
+
+.collaboration-arrow {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #9ca3af;
+  transition: all 0.3s ease;
+}
+
+.collaboration-card:hover .collaboration-arrow {
+  transform: translateX(4px);
+  color: #0086c3;
+}
+
+/* Offer Cards Enhanced - OLD STYLES - Now using offer-card-enhanced in offers.css */
+/* Keeping for backward compatibility but these won't conflict */
+
+/* Membership Tabs */
+.membership-tab-btn {
+  position: relative;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.membership-tab-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.membership-tab-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.membership-tab-btn:active {
+  transform: scale(0.95);
+}
+
+/* Membership Card Animation */
+.membership-card {
+  animation: fadeInScale 0.5s ease-out;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* FAQ Cards Enhanced */
+.faq-card {
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.faq-card:hover {
+  transform: translateX(5px);
+  border-left: 4px solid #0086c3;
+  padding-left: calc(2rem - 4px);
+}
+
+.faq-card button {
+  position: relative;
+  z-index: 1;
+}
+
+/* Section Background Patterns */
+.interactive-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(0, 134, 195, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(29, 78, 216, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.interactive-section > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Floating Animation for Icons */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.benefit-icon {
+  animation: float 3s ease-in-out infinite;
+}
+
+.benefit-card:hover .benefit-icon {
+  animation: none;
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Pulse Effect for Active Membership Tab */
+.membership-tab-btn[class*="bg-primary-blue"] {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 134, 195, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(0, 134, 195, 0);
+  }
+}
+
+/* Stagger Animation for Grid Items */
+@media (prefers-reduced-motion: no-preference) {
+  .benefit-card,
+  .offer-card,
+  .faq-card {
+    animation: fadeInUp 0.6s ease-out backwards;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth Scroll Behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading State for Cards */
+.card {
+  will-change: transform;
+}
+
+/* Enhanced Hover States */
+.card:hover {
+  z-index: 10;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .animate-on-scroll {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .membership-tab-btn {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+}
+

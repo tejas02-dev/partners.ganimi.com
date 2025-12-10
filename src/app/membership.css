@@ -1,0 +1,240 @@
+/* Membership Section Styles */
+.membership-section {
+  background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+  padding: 5rem 0;
+  position: relative;
+}
+
+.membership-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.membership-tier-card {
+  position: relative;
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  border: 3px solid;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  font-family: 'Montserrat', sans-serif !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 450px;
+}
+
+.membership-tier-card.popular {
+  border-width: 4px;
+  box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.15);
+}
+
+.membership-tier-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.membership-tier-card:hover::before {
+  opacity: 1;
+}
+
+.membership-tier-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+.membership-tier-card.selected {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: pulse-border 2s ease-in-out infinite;
+}
+
+@keyframes pulse-border {
+  0%, 100% {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  50% {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 4px rgba(102, 126, 234, 0.3);
+  }
+}
+
+.membership-tier-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.membership-tier-title {
+  flex: 1;
+}
+
+.membership-tier-subtitle {
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.7;
+  margin: 0.25rem 0 0 0;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.membership-tier-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.membership-tier-card:hover .membership-tier-icon {
+  transform: rotate(10deg) scale(1.1);
+}
+
+.membership-tier-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.membership-tier-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.membership-tier-description {
+  line-height: 1.75;
+  font-size: 0.95rem;
+  font-family: 'Montserrat', sans-serif !important;
+  margin: 0;
+}
+
+.membership-features {
+  margin-top: auto;
+}
+
+.features-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.features-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif !important;
+  line-height: 1.5;
+}
+
+.feature-check-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.popular-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  color: #ffffff;
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Montserrat', sans-serif !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+  z-index: 10;
+  animation: pulse-glow-badge 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow-badge {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.6);
+  }
+}
+
+.membership-tier-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Montserrat', sans-serif !important;
+  animation: fadeIn 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.badge-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #ffffff;
+}
+
+.membership-tier-card.popular .membership-tier-badge {
+  top: 3.5rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .membership-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .membership-tier-card {
+    padding: 1.5rem;
+  }
+}
+
