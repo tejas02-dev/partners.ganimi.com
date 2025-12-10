@@ -29,32 +29,11 @@ export default function DocumentsPage() {
 
   const documents = [
     {
-      title: "Partnership Agreement",
-      description: "Official partnership agreement document outlining terms and conditions",
+      title: "Ganimi MOU for Partners",
+      description: "Official Memorandum of Understanding for Sustainable Business Partnership between Creepon Edutech Pvt. Ltd. (Brand: Ganimi) and Vendor/Service Providers",
       type: "PDF",
-      size: "2.5 MB",
-      icon: "M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-    },
-    {
-      title: "Vendor Guidelines",
-      description: "Comprehensive guidelines for vendors on platform usage and best practices",
-      type: "PDF",
-      size: "1.8 MB",
+      file: "/Ganimi MOU for Partners.pdf",
       icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-    },
-    {
-      title: "Branding Guidelines",
-      description: "Brand guidelines and logo usage policies for partners",
-      type: "PDF",
-      size: "3.2 MB",
-      icon: "M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-    },
-    {
-      title: "API Documentation",
-      description: "Technical documentation for API integration and development",
-      type: "PDF",
-      size: "4.1 MB",
-      icon: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
     },
   ];
 
@@ -71,7 +50,7 @@ export default function DocumentsPage() {
             Access important documents and resources for partners
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 gap-6 max-w-2xl mx-auto">
             {documents.map((doc, index) => (
               <div key={index} className="card document-card animate-on-scroll" style={{ animationDelay: `${index * 0.1}s` }}>
                 <div className="document-icon">
@@ -83,11 +62,15 @@ export default function DocumentsPage() {
                 <p className="text-gray-600 mb-4" style={{ color: "#4b5563" }}>{doc.description}</p>
                 <div className="document-meta">
                   <span className="document-type">{doc.type}</span>
-                  <span className="document-size">{doc.size}</span>
                 </div>
-                <button className="btn btn-primary mt-4 w-full">
+                <a 
+                  href={doc.file} 
+                  download="Ganimi MOU for Partners.pdf"
+                  className="btn btn-primary mt-4 w-full"
+                  style={{ display: "block", textAlign: "center", textDecoration: "none" }}
+                >
                   Download
-                </button>
+                </a>
               </div>
             ))}
           </div>

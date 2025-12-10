@@ -68,23 +68,30 @@ export default function ContactPage() {
     setIsLoading(true);
 
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    setIsSubmitted(true);
+    const response = await fetch('https://ganimi.app/api/waitlist/vendors-interest', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    if (response.status === 200) {
+      setIsSubmitted(true);
+      setFormData({
+        vendorName: "",
+        vendorCategory: "",
+        contactPerson: "",
+        phoneNumber: "",
+        emailAddress: "",
+        businessAddress: "",
+        programsOffered: "",
+        targetAgeGroup: "",
+        websiteSocialMedia: "",
+        yearsOfExperience: "",
+        preferredEventParticipation: "",
+      });
+    }
     setIsLoading(false);
-    setFormData({
-      vendorName: "",
-      vendorCategory: "",
-      contactPerson: "",
-      phoneNumber: "",
-      emailAddress: "",
-      businessAddress: "",
-      programsOffered: "",
-      targetAgeGroup: "",
-      websiteSocialMedia: "",
-      yearsOfExperience: "",
-      preferredEventParticipation: "",
-    });
   };
 
   return (
@@ -169,7 +176,7 @@ export default function ContactPage() {
                     Phone Number <span className="text-[var(--primary-blue)]">*</span>
                   </label>
                   <input
-                    type="tel"
+                    type="number"
                     id="phoneNumber"
                     name="phoneNumber"
                     value={formData.phoneNumber}
@@ -250,7 +257,6 @@ export default function ContactPage() {
                     <option value="10-14">10-14 years (Middle School)</option>
                     <option value="14-18">14-18 years (High School)</option>
                     <option value="all">All Ages</option>
-                    <option value="custom">Custom Range</option>
                   </select>
                 </div>
 
@@ -372,6 +378,31 @@ export default function ContactPage() {
               </button>
             </div>
           )}
+
+          {/* Contact Information */}
+          <div className="max-w-4xl mx-auto mt-12 animate-on-scroll">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-[var(--gray-800)] mb-2">Get in Touch</h2>
+              <p className="text-[var(--gray-600)]">You can also reach us directly through</p>
+            </div>
+            
+            <div className="flex justify-center max-w-3xl mx-auto">
+              {/* Email */}
+              <div className="card p-6 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-[var(--primary-blue)]/10 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-6 h-6 text-[var(--primary-blue)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-sm text-[var(--gray-600)] mb-1">Email Address</p>
+                  <a href="mailto:sales@ganimi.com" className="text-lg font-semibold text-[var(--primary-blue)] hover:underline">
+                    sales@ganimi.com
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

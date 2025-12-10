@@ -33,7 +33,7 @@
 
 .logo a {
   text-decoration: none;
-  color: #0086c3;
+  color: #001f3f;
   font-weight: 700;
   font-size: 1.5rem;
   margin: 0;
@@ -130,6 +130,10 @@
 }
 
 @media (max-width: 768px) {
+  .logo a {
+    font-size: 1.25rem;
+  }
+  
   .nav {
     position: absolute;
     top: 100%;
@@ -173,6 +177,12 @@
 
   .header-actions .btn {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo a {
+    font-size: 1.1rem;
   }
 }
 

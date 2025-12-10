@@ -35,6 +35,48 @@ export default function HomePage() {
     <main className="min-h-screen">
       <Navbar />
       
+      {/* Intro Section - Success and Satisfaction */}
+      <section className="intro-hero-section">
+        {/* Background Images */}
+        <div className="intro-backdrop-images">
+          <Image
+            src="/success.png"
+            alt="Success"
+            width={600}
+            height={800}
+            className="intro-backdrop-image intro-backdrop-success"
+          />
+          <Image
+            src="/satisfaction.png"
+            alt="Satisfaction"
+            width={600}
+            height={800}
+            className="intro-backdrop-image intro-backdrop-satisfaction"
+          />
+        </div>
+        
+        <div className="intro-hero-container">
+          <div className="intro-hero-content">
+            {/* Title */}
+            <h1 className="intro-title">
+              Life is all about <span className="intro-title-highlight">Success</span> and <span className="intro-title-highlight">Satisfaction</span>!
+            </h1>
+            
+            {/* Large Company Logo */}
+            <div className="intro-logo-wrapper">
+              <Image
+                src="/logo-white.png"
+                alt="Ganimi Logo"
+                width={300}
+                height={300}
+                className="intro-logo"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-background">
@@ -46,25 +88,13 @@ export default function HomePage() {
           <div className="hero-content">
             <div className="hero-left">
               <div className="hero-text">
-                {/* Logo */}
-                <div className="logo-section">
-                  <Image
-                    src="/logo-white.png"
-                    alt="Ganimi Logo"
-                    width={120}
-                    height={120}
-                    className="hero-logo"
-                    priority
-                  />
-                </div>
-
                 {/* Event Badge */}
                 <div className="event-badge">
                   <span>Vendor Partnership Program</span>
                 </div>
                 
                 <h1 className="hero-title">
-                  <span className="gradient-text">Life is all about success and satisfaction</span>
+                  <span className="gradient-text">Business Opportunities</span>
                 </h1>
                 
                 <h2 className="hero-subtitle">

@@ -34,6 +34,9 @@ export default function Navbar() {
           <nav className={`nav ${isMenuOpen ? "open" : ""}`}>
             <ul className="nav-list">
               <li>
+                <Link href="/">Home</Link>
+              </li>
+              <li>
                 <Link href="/benefits">Benefits</Link>
               </li>
               <li>
