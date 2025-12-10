@@ -68,7 +68,7 @@ export default function ContactPage() {
     setIsLoading(true);
 
     // Simulate API call
-    const response = await fetch('https://ganimi.app/api/waitlist/vendors-interest', {
+    const response = await fetch('https://ganimi.app/api/waitlist/vendor-interest', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
